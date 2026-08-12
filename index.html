@@ -1,0 +1,57 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>agent deeplink</title>
+    <style>
+      :root {
+        font-family: system-ui, sans-serif;
+      }
+
+      body {
+        display: grid;
+        min-height: 100vh;
+        margin: 0;
+        place-items: center;
+      }
+
+      main {
+        padding: 2rem;
+        text-align: center;
+      }
+
+      a {
+        color: inherit;
+      }
+    </style>
+  </head>
+  <body>
+    <main>
+      <h1>agent deeplink</h1>
+      <p>invalid agent deeplink</p>
+      <a hidden>open thread</a>
+    </main>
+    <script>
+      const [agent, id] = location.hash.slice(1).split("/")
+      const valid = /^[0-9a-f]{8}-[0-9a-f]{4}-[1-8][0-9a-f]{3}-[89ab][0-9a-f]{3}-[0-9a-f]{12}$/i.test(id)
+      const thread = valid
+        ? {
+            codex: { name: "codex", url: `codex://threads/${id}` },
+            claude: { name: "claude code", url: `claude://resume?session=${id}` },
+          }[agent]
+        : undefined
+
+      if (thread) {
+        const status = document.querySelector("p")
+        const link = document.querySelector("a")
+
+        document.title = `open ${thread.name} thread`
+        status.textContent = `opening ${thread.name} thread`
+        link.href = thread.url
+        link.hidden = false
+        location.replace(thread.url)
+      }
+    </script>
+  </body>
+</html>
