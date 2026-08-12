@@ -52,6 +52,9 @@
         status.textContent = `opening ${thread.name} thread`
         link.href = thread.url
         link.hidden = false
+        document.addEventListener("visibilitychange", () => {
+          if (!document.hidden) history.back()
+        })
         location.replace(thread.url)
       }
     </script>
