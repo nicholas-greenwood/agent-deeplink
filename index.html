@@ -52,8 +52,12 @@
         status.textContent = `opening ${thread.name} thread`
         link.href = thread.url
         link.hidden = false
+        const returnToSource = setTimeout(() => history.back(), 1000)
+        addEventListener("blur", () => {
+          clearTimeout(returnToSource)
+          addEventListener("focus", () => history.back(), { once: true })
+        }, { once: true })
         location.replace(thread.url)
-        setTimeout(() => history.back(), 1000)
       }
     </script>
   </body>

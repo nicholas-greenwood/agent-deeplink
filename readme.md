@@ -5,11 +5,11 @@ open local codex and claude code threads from clickable https links
 github removes custom URL schemes from markdown, so this https bridge makes local agent threads clickable in pull requests and issues
 
 ```text
-https://nicholas-greenwood.github.io/agent-deeplink/?v=2#codex/<thread-id>
+https://nicholas-greenwood.github.io/agent-deeplink/?v=3#codex/<thread-id>
 ```
 
 ```text
-https://nicholas-greenwood.github.io/agent-deeplink/?v=2#claude/<session-id>
+https://nicholas-greenwood.github.io/agent-deeplink/?v=3#claude/<session-id>
 ```
 
 the id stays in the url fragment and is never sent to the server
