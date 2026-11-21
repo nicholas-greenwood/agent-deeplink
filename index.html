@@ -36,11 +36,15 @@
     </main>
     <script>
       const [agent, id] = location.hash.slice(1).split("/")
-      const valid = /^[0-9a-f]{8}-[0-9a-f]{4}-[1-8][0-9a-f]{3}-[89ab][0-9a-f]{3}-[0-9a-f]{12}$/i.test(id)
+      const desktop = id?.startsWith("local_")
+      const valid = /^[0-9a-f]{8}-[0-9a-f]{4}-[1-8][0-9a-f]{3}-[89ab][0-9a-f]{3}-[0-9a-f]{12}$/i.test(desktop ? id.slice(6) : id)
       const thread = valid
         ? {
-            codex: { name: "codex", url: `codex://threads/${id}` },
-            claude: { name: "claude code", url: `claude://resume?session=${id}` },
+            codex: desktop ? undefined : { name: "codex", url: `codex://threads/${id}` },
+            claude: {
+              name: "claude code",
+              url: desktop ? `claude://claude.ai/epitaxy/${id}` : `claude://resume?session=${id}`,
+            },
           }[agent]
         : undefined
 

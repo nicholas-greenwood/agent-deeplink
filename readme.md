@@ -12,6 +12,12 @@ https://nicholas-greenwood.github.io/agent-deeplink/#codex/<thread-id>
 https://nicholas-greenwood.github.io/agent-deeplink/#claude/<session-id>
 ```
 
+claude desktop sessions also open by their `local_<id>` session id:
+
+```text
+https://nicholas-greenwood.github.io/agent-deeplink/#claude/local_<id>
+```
+
 the id stays in the url fragment and is never sent to the server
 
 i will keep this live until at least 2028
